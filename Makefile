@@ -1,16 +1,26 @@
-restart: stop start
+init: docker-down docker-pull \
+		docker-build copy-example-files \
+		docker-up
 
-start:
+up: docker-up
+down: docker-down
+restart: down up
+
+docker-up:
 	docker-compose up -d
 
-stop:
+docker-down:
 	docker-compose down
 
-logs:
+docker-logs:
 	docker-compose logs -f
 
-flush:
-	docker-compose down -v
+docker-pull:
+	docker-compose pull
 
-build:
+docker-build:
 	docker-compose build
+
+copy-example-files:
+	cp example/wine.xlsx src/wine.xlsx
+	cp .env.example .env

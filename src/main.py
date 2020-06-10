@@ -3,6 +3,7 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 import datetime
 import pandas
 import collections
+import os
 
 env = Environment(
     loader=FileSystemLoader('.'),
@@ -15,7 +16,7 @@ winery_foundation_year = 1920
 current_year = datetime.datetime.now().year
 winery_age = current_year - winery_foundation_year
 
-excel_data = pandas.read_excel('data/wine.xlsx', na_values=None, keep_default_na=False)
+excel_data = pandas.read_excel(os.getenv('EXCEL_DATABASE_PATH'), na_values=None, keep_default_na=False)
 wines = excel_data.to_dict('records')
 grouped_wines = collections.defaultdict(list)
 

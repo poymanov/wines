@@ -1,4 +1,6 @@
 .idea
-env/
+.env
 .vscode/
 index.html
+src/*.xlsx
+src/*.xls
